@@ -207,6 +207,7 @@ function renderQuestion(q, displayNumber, submitted) {
   const showAnswer = submitted || progress.revealed;
   const article = document.createElement("article");
   article.className = "question-card";
+  article.id = questionAnchor(q);
   article.innerHTML = `
     <div class="question-head">
       <span class="tag">${escapeHTML(q.topic)}</span>
@@ -297,10 +298,16 @@ function renderBatchResult(batch, submitted) {
   }
   const right = batch.filter((q) => (state.progress[q.id] || {}).correct).length;
   const score = Math.round((right / batch.length) * 100);
+  const wrongLinks = batch
+    .map((q, index) => ({ q, displayNumber: state.batchIndex * BATCH_SIZE + index + 1 }))
+    .filter(({ q }) => (state.progress[q.id] || {}).correct === false)
+    .map(({ q, displayNumber }) => `<a href="#${questionAnchor(q)}">第 ${displayNumber} 题</a>`)
+    .join("");
   els.batchResult.hidden = false;
   els.batchResult.innerHTML = `
     <strong>${right} / ${batch.length} · ${score}%</strong>
     <p>${score >= 90 ? "本组表现很稳，继续推进。" : score >= 70 ? "基础掌握不错，建议复盘错题。" : "建议回看相关知识点后重刷本组。"}</p>
+    <p class="wrong-links">本组错题：${wrongLinks || "<span>无</span>"}</p>
   `;
 }
 
@@ -357,6 +364,10 @@ function sameAnswer(left, right) {
 
 function answerLine(q, progress) {
   return `你的答案：${(progress.choice || []).join("") || "未选择"} · 正确答案：${q.answer.join("")}`;
+}
+
+function questionAnchor(q) {
+  return `question-${q.id}`;
 }
 
 function typeLabel(type) {

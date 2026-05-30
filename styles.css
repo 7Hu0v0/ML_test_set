@@ -326,6 +326,7 @@ select:focus {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.035);
+  scroll-margin-top: 18px;
 }
 
 .question-card h3 {
@@ -415,6 +416,33 @@ select:focus {
 .batch-result p {
   margin-top: 6px;
   color: var(--soft);
+}
+
+.wrong-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.wrong-links a,
+.wrong-links span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: #050505;
+  background: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.wrong-links a:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
 }
 
 .card-actions {
