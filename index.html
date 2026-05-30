@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>机器学习刷题终端</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="grid-bg" aria-hidden="true"></div>
+    <aside class="sidebar">
+      <header class="brand">
+        <span class="brand-mark">ML</span>
+        <div>
+          <h1>机器学习刷题终端</h1>
+          <p>black / white drill system</p>
+        </div>
+      </header>
+
+      <section class="panel">
+        <label class="field">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="关键词 / 算法 / 答案" />
+        </label>
+
+        <label class="field">
+          <span>题集</span>
+          <select id="setFilter">
+            <option value="all">全部题集</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>知识点</span>
+          <select id="topicFilter">
+            <option value="all">全部知识点</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>题型</span>
+          <select id="typeFilter">
+            <option value="all">全部题型</option>
+            <option value="single">单选题</option>
+            <option value="multiple">多选题</option>
+            <option value="true_false">判断题</option>
+          </select>
+        </label>
+
+        <div class="switches">
+          <label>
+            <input id="wrongOnly" type="checkbox" />
+            <span>只看错题</span>
+          </label>
+          <label>
+            <input id="shuffleMode" type="checkbox" />
+            <span>随机顺序</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="学习统计">
+        <div><strong id="doneCount">0</strong><span>已答</span></div>
+        <div><strong id="rightCount">0</strong><span>正确</span></div>
+        <div><strong id="accuracy">0%</strong><span>正确率</span></div>
+      </section>
+
+      <section class="progress-panel">
+        <div class="progress-top">
+          <span>总进度</span>
+          <strong id="learningPercent">0%</strong>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span id="learningBar"></span></div>
+        <p id="learningText">完成 0 / 70 题</p>
+      </section>
+
+      <section class="actions">
+        <button id="exportWrong" type="button">导出错题</button>
+        <button id="resetProgress" type="button">重置进度</button>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p id="quizMeta" class="eyebrow">READY</p>
+          <h2 id="quizTitle">10 题一组练习</h2>
+        </div>
+        <nav class="pager" aria-label="题组导航">
+          <button id="prevBatch" type="button" aria-label="上一组">‹</button>
+          <span id="pageText">0 / 0</span>
+          <button id="nextBatch" type="button" aria-label="下一组">›</button>
+        </nav>
+      </header>
+
+      <section class="batch-card">
+        <div class="batch-head">
+          <div>
+            <span id="batchTag" class="tag">BATCH</span>
+            <p id="batchHint">答完本组后统一评分。</p>
+          </div>
+          <strong id="batchAnswered">0 / 10</strong>
+        </div>
+        <div id="questionList" class="question-list"></div>
+        <div id="batchResult" class="batch-result" hidden></div>
+        <div class="card-actions">
+          <button id="revealBatch" class="secondary" type="button">查看答案</button>
+          <button id="submitBatch" class="primary" type="button">提交本组</button>
+          <button id="nextAfterBatch" class="primary" type="button">下一组</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./data.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
